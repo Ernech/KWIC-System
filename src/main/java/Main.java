@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class Main {
 
     public static void main(String [] args){
-       // String titulo = "essentials of bussiness communications";
-        String titulo = "el señor de los anillos";
+        String titulo = "essentials of bussiness communications";
+       //String titulo = "el señor de los anillos";
        List<String> palabrasNoClave = new ArrayList<>();
        palabrasNoClave.add("el");
        palabrasNoClave.add("de");
@@ -20,6 +21,7 @@ public class Main {
 
 
         System.out.println(circularShifts( indexList(titulo),keywords(titulo,palabrasNoClave)));
+        alfabetizar(circularShifts( indexList(titulo),keywords(titulo,palabrasNoClave)));
     }
 
     private static List<String> keywords(String titulo,List<String> palabrasNoClave){
@@ -33,11 +35,10 @@ public class Main {
         return palabras;
     }
     private static  String [][] indexList(String titulo){
-       String tituloRorate = titulo.concat("/");
+      String tituloRorate = titulo.concat(" /");
         String [] line = tituloRorate.split(" ");
         String [][] output = new String[line.length][line.length];
-      //  return null;
-        System.out.println("\n The circular shifted lines are :");
+        System.out.println("\nThe circular shifted lines are :");
         for (int i = 0; i < line.length; i++){
             for (int j = 0; j < line.length; j++) {
                 output[i][j] = line[(i + j) % line.length];
@@ -51,12 +52,21 @@ public class Main {
     private static List<String> circularShifts( String [][] output, List<String> palabrasClave){
         List<String> circularList = new ArrayList<>();
         for (int i = 0; i < output.length; i++){
+                String fila ="";
                 if(palabrasClave.contains(output[i][0])){
-                    System.out.println(output[i]);
+                   for(int j=0; j< output.length; j++){
+                       fila += output[i][j]+" ";
+                   }
+                    circularList.add(fila);
                 }
         }
-
-
         return circularList;
     }
+ private static void alfabetizar(List<String> circularList){
+     TreeSet<String> sortedList = new TreeSet<>();
+     for (int i =0;i<circularList.size();i++){
+         sortedList.add(circularList.get(i));
+     }
+     System.out.println("Ordenado: "+sortedList);
+ }
 }
