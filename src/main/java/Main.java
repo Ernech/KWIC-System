@@ -12,6 +12,7 @@ public class Main {
         input.agregarTitulo("essentials of bussiness communications");
         input.agregarTitulo("encycopledia of research on library");
         input.agregarTitulo("harry potter y el caliz de fuego");
+        input.agregarTitulo("los anillos del señor");
         input.agregarPalabraNoClave("el");
         input.agregarPalabraNoClave("de");
         input.agregarPalabraNoClave("los");

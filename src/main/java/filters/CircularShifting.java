@@ -21,22 +21,21 @@ public class CircularShifting {
 
     private  List<String> keywords(List<String> titulo, List<String> palabrasNoClave){
         List<String> palabras = new ArrayList<>();
+        
         for(int i=0;i<titulo.size();i++){
+            int c=0;
             String [] tituloArray = titulo.get(i).split(" ");
+            
             for(int j =0;j<tituloArray.length;j++){
             if(!palabrasNoClave.contains(tituloArray[j])){
-                if(i==0){
-                   palabras.add(tituloArray[i]); 
-                }
-                else{
+                System.out.println(tituloArray[j]);
                   if(!palabras.contains(tituloArray[j])){
-                    palabras.add(tituloArray[i]);
-                }  
+                    palabras.add(tituloArray[j]);
+                }
                 }
                 
                 
             }
-        }
         }
         
         
