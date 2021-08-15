@@ -1,3 +1,4 @@
+import GUI.KWICUI;
 import filters.Alphabetizer;
 import filters.CircularShifting;
 import filters.Input;
@@ -20,12 +21,16 @@ public class Main {
         input.agregarPalabraNoClave("y");
         input.agregarPalabraNoClave("on");
         input.agregarPalabraNoClave("of");
-        for (int i = 0; i < input.getTitles().size(); i++) {
-            CircularShifting circularShifting = new CircularShifting(input.getTitles().get(i), input.getPalabrasNoClave());
+        
+        KWICUI ventana= new KWICUI();
+        
+        
+        //for (int i = 0; i < input.getTitles().size(); i++) {
+            CircularShifting circularShifting = new CircularShifting(input.getTitles(), input.getPalabrasNoClave());
             Alphabetizer alphabetizer = new Alphabetizer(circularShifting.circularShiftsProcess());
             Output output = new Output(alphabetizer.alfabetizar());
             System.out.println(output);
-        }
+        //}
     }
 
 }

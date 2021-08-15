@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CircularShifting {
 
-    private String titulo;
+    private List<String> titulo;
     private List<String> palabrasNoClave;
 
 
@@ -14,46 +14,71 @@ public class CircularShifting {
 
     }
 
-    public CircularShifting(String titulo, List<String> palabrasNoClave) {
+    public CircularShifting(List<String> titulo, List<String> palabrasNoClave) {
         this.titulo = titulo;
         this.palabrasNoClave = palabrasNoClave;
     }
 
-    private  List<String> keywords(String titulo, List<String> palabrasNoClave){
-        String [] tituloArray = titulo.split(" ");
+    private  List<String> keywords(List<String> titulo, List<String> palabrasNoClave){
         List<String> palabras = new ArrayList<>();
-        for(int i =0;i<tituloArray.length;i++){
-            if(!palabrasNoClave.contains(tituloArray[i])){
-                palabras.add(tituloArray[i]);
+        for(int i=0;i<titulo.size();i++){
+            String [] tituloArray = titulo.get(i).split(" ");
+            for(int j =0;j<tituloArray.length;j++){
+            if(!palabrasNoClave.contains(tituloArray[j])){
+                if(i==0){
+                   palabras.add(tituloArray[i]); 
+                }
+                else{
+                  if(!palabras.contains(tituloArray[j])){
+                    palabras.add(tituloArray[i]);
+                }  
+                }
+                
+                
             }
         }
-      //  System.out.println(palabras);
+        }
+        
+        
+        
+       System.out.println(palabras);
         return palabras;
     }
-    private   String [][] indexList(String titulo){
-        String tituloRorate = titulo.concat(" /");
+    public   List<String> indexList(List<String> titulo){
+        List<String> indList=new  ArrayList<>();
+        
+        for(int k=0;k<titulo.size();k++){
+        String tituloRorate = titulo.get(k).concat(" /");
         String [] line = tituloRorate.split(" ");
         String [][] output = new String[line.length][line.length];
         //System.out.println("\nThe circular shifted lines are :");
         for (int i = 0; i < line.length; i++){
+            String aux="";
             for (int j = 0; j < line.length; j++) {
                 output[i][j] = line[(i + j) % line.length];
+                aux+=output[i][j]+" ";
+                
               //  System.out.print(output[i][j] + " ");
             }
+            indList.add(aux);
            // System.out.println("\n");
+        }  
         }
-        return  output;
+        
+        return  indList;
     }
 
     public  List<String> circularShiftsProcess(){
         List<String> keywords = this.keywords(this.titulo,this.palabrasNoClave);
-        String [][]output = this.indexList(this.titulo);
+        List<String> output= this.indexList(this.titulo);
         List<String> circularList = new ArrayList<>();
-        for (int i = 0; i < output.length; i++){
+        for (int i = 0; i < output.size(); i++){
             String fila ="";
-            if(keywords.contains(output[i][0])){
-                for(int j=0; j< output.length; j++){
-                    fila += output[i][j]+" ";
+            String[] primeraPalabra=output.get(i).split(" ");
+            if(keywords.contains(primeraPalabra[0])){
+                
+                for(int j=0; j< primeraPalabra.length; j++){
+                    fila += primeraPalabra[j]+" ";
                 }
                 circularList.add(fila);
             }
