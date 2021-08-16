@@ -7,6 +7,7 @@ package filters;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -15,11 +16,9 @@ import java.util.List;
 public class Buscar {
     
     private List<String> listaBuscar;
-    private  List<String> titulo;
 
-    public Buscar(List<String> listaBuscar,List<String> titulo) {
+    public Buscar(List<String> listaBuscar) {
         this.listaBuscar = listaBuscar;
-        this.titulo=titulo;
     }
 
     public List<String> getListaBuscar() {
@@ -30,31 +29,18 @@ public class Buscar {
         this.listaBuscar = listaBuscar;
     }
 
-    public List<String> getTitulo() {
-        return titulo;
-    }
 
-    public void setTitulo(List<String> titulo) {
-        this.titulo = titulo;
-    }
     
     
     
-    public List<String> busqueda(List<String> output){
-        List<String> resultado=new ArrayList<>();
+    public List<String> busqueda(String termino){
+        List<String> resultado;
         
-        
-        
-        for (int i = 0; i < output.size(); i++){
-            String fila ="";
-            String[] primeraPalabra=output.get(i).split(" ");
-            if(this.listaBuscar.contains(primeraPalabra[0])){
-                
-                for(int j=0; j< primeraPalabra.length; j++){
-                    fila += primeraPalabra[j]+" ";
-                }
-                resultado.add(fila);
-            }
+        if(termino==null || termino.isEmpty()){
+            resultado=this.listaBuscar;
+        }
+        else{
+         resultado = listaBuscar.stream().filter(titulo-> titulo.contains(termino.trim())).collect(Collectors.toList());
         }
         
         return resultado;

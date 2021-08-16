@@ -206,9 +206,9 @@ public class KWICUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CircularShifting circularShifting = new CircularShifting(lista(jTextArea1.getText()),lista(jTextArea2.getText()));
-        Buscar buscar= new Buscar(lista(jTextPane1.getText()),lista(jTextArea1.getText()));
-        Alphabetizer alphabetizer = new Alphabetizer(buscar.busqueda(circularShifting.indexList(lista(jTextArea1.getText()))));
+
+       Buscar buscar= new Buscar(lista(jTextArea1.getText()));
+        Alphabetizer alphabetizer = new Alphabetizer(buscar.busqueda(jTextPane1.getText()));
         Output output = new Output(alphabetizer.alfabetizar());
         jTextArea3.setText(output.getOutput());
     }//GEN-LAST:event_jButton3ActionPerformed
