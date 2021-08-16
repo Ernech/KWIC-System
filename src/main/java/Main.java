@@ -1,3 +1,4 @@
+//import GUI.KWICUI;
 import GUI.KWICUI;
 import filters.Alphabetizer;
 import filters.CircularShifting;
@@ -12,6 +13,7 @@ public class Main {
         input.agregarTitulo("essentials of bussiness communications");
         input.agregarTitulo("encycopledia of research on library");
         input.agregarTitulo("harry potter y el caliz de fuego");
+        input.agregarTitulo("harry potter y la piedra filosofal");
         input.agregarTitulo("los anillos del señor");
         input.agregarPalabraNoClave("el");
         input.agregarPalabraNoClave("de");
@@ -22,9 +24,10 @@ public class Main {
         input.agregarPalabraNoClave("y");
         input.agregarPalabraNoClave("on");
         input.agregarPalabraNoClave("of");
-        
-        KWICUI ventana= new KWICUI();
-        
+        input.agregarPalabraNoClave("del");
+
+       KWICUI ventana= new KWICUI();
+
         
         //for (int i = 0; i < input.getTitles().size(); i++) {
             CircularShifting circularShifting = new CircularShifting(input.getTitles(), input.getPalabrasNoClave());
