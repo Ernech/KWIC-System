@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -195,21 +196,28 @@ public class KWICUI extends javax.swing.JFrame {
        return lista;
    }
     private void abrirArchivo() {
+        String fileList="";
         JFileChooser chooser = new JFileChooser();
+        
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 ".txt files", "txt");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
-
+            File file= chooser.getSelectedFile();
             try {
-                BufferedReader br = new BufferedReader(new FileReader(chooser.getSelectedFile().getName()));
-
-
-            } catch (FileNotFoundException exception) {
-                exception.printStackTrace();
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = br.readLine()) != null) {
+                fileList+=line+"\n";
             }
 
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+            
+
         }
+        jTextArea1.setText(fileList);
     }
 }
