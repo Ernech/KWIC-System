@@ -1,9 +1,6 @@
-//import GUI.KWICUI;
+
 import GUI.KWICUI;
-import filters.Alphabetizer;
-import filters.CircularShifting;
-import filters.Input;
-import filters.Output;
+
 
 public class Main {
 
