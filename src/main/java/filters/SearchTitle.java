@@ -44,11 +44,14 @@ public class SearchTitle {
             List<String> result = new ArrayList<>();
             String[] words=term.split(" ");
             for (int i = 0; i < this.titlesList.size(); i++){
+               int wordsIn = 0;
                 for (int j = 0;j<words.length;j++){
                     if(this.titlesList.get(i).contains(words[j].toLowerCase().trim())){
-                        result.add(titlesList.get(i));
-                        break;
+                      wordsIn++;
                     }
+                }
+                if(wordsIn==words.length){
+                    result.add(this.titlesList.get(i));
                 }
             }
             return result;
@@ -57,7 +60,6 @@ public class SearchTitle {
 
         
     }
-    
     
     
 }
