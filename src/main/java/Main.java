@@ -27,6 +27,7 @@ public class Main {
         input.agregarPalabraNoClave("del");
 
        KWICUI ventana= new KWICUI();
+       ventana.setLocationRelativeTo(null);
 
         
         //for (int i = 0; i < input.getTitles().size(); i++) {
