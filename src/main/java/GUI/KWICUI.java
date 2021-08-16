@@ -138,7 +138,7 @@ public class KWICUI extends javax.swing.JFrame {
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
 
-        jLabel3.setText("Indice");
+        jLabel3.setText("Índice");
 
         jScrollPane4.setViewportView(jTextPane1);
 
