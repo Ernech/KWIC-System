@@ -212,7 +212,7 @@ public class KWICUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "¡No hay títulos para buscar!");
         } else {
             SearchTitle searchTitle = new SearchTitle(this.titlesIndex);
-            jTextArea3.setText(getSearchOutput(searchTitle.searchTitleMethod(jTextPane1.getText())));
+            jTextArea3.setText(getSearchOutput(searchTitle.searchTitleMethod(jTextPane1.getText().trim())));
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
