@@ -1,14 +1,10 @@
-
-
 package GUI;
 
 import filters.Alphabetizer;
 import filters.CircularShifting;
 import filters.Output;
-import java.awt.Button;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +22,7 @@ public class KWICUI extends javax.swing.JFrame {
     private JLabel jLabel3;
     private JPanel jPanel1;
     private JPanel jPanel2;
-    private JScrollBar jScrollBar1;
+
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
     private JScrollPane jScrollPane3;
@@ -60,7 +56,7 @@ public class KWICUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
-        jScrollBar1 = new javax.swing.JScrollBar();
+
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -149,7 +145,7 @@ public class KWICUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                       )
                     .addComponent(jLabel3))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
@@ -161,7 +157,7 @@ public class KWICUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                 )
                 .addContainerGap())
         );
 
@@ -190,7 +186,7 @@ public class KWICUI extends javax.swing.JFrame {
        String[] div=palabras.split("\n");
        
        for(int i=0;i<div.length;i++){
-           lista.add(div[i]);
+           lista.add(div[i].toLowerCase());
        }
             
        return lista;
