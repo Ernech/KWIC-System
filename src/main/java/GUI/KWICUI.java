@@ -6,10 +6,10 @@
 package GUI;
 
 import filters.Alphabetizer;
-import filters.Buscar;
+import filters.SearchTitle;
 import filters.CircularShifting;
 import filters.Output;
-import java.awt.Button;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -207,8 +207,9 @@ public class KWICUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-       Buscar buscar= new Buscar(lista(jTextArea1.getText()));
-        Alphabetizer alphabetizer = new Alphabetizer(buscar.busqueda(jTextPane1.getText()));
+       SearchTitle searchTitle= new SearchTitle(lista(jTextArea1.getText()));
+        CircularShifting circularShifting = new CircularShifting(searchTitle.searchTitleMethod(jTextPane1.getText()),lista(jTextArea2.getText()));
+        Alphabetizer alphabetizer = new Alphabetizer(circularShifting.circularShiftsProcess());
         Output output = new Output(alphabetizer.alfabetizar());
         jTextArea3.setText(output.getOutput());
     }//GEN-LAST:event_jButton3ActionPerformed

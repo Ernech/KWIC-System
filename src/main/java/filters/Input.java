@@ -9,7 +9,7 @@ public class Input {
 
 
   private  List<String> titles ;//= Arrays.asList("el señor de los anillos", "essentials of bussiness communications");
-    private List<String> palabrasNoClave;// = Arrays.asList("el","de","los","del","uno","la","al","of");
+    private List<String> nonValueWords;// = Arrays.asList("el","de","los","del","uno","la","al","of");
 
     /**
      * Constructor para inicalizar los arrays
@@ -21,7 +21,7 @@ public class Input {
 
     public Input() {
         this.titles = new ArrayList<>();
-        this.palabrasNoClave = new ArrayList<>();
+        this.nonValueWords = new ArrayList<>();
     }
     public List<String> getTitles() {
         return titles;
@@ -32,17 +32,17 @@ public class Input {
     }
 
     public List<String> getPalabrasNoClave() {
-        return palabrasNoClave;
+        return nonValueWords;
     }
 
-    public void setPalabrasNoClave(List<String> palabrasNoClave) {
-        this.palabrasNoClave = palabrasNoClave;
+    public void setPalabrasNoClave(List<String> nonValueWords) {
+        this.nonValueWords = nonValueWords;
     }
 
     public void agregarTitulo(String titulo){
         this.titles.add(titulo);
     }
-    public void agregarPalabraNoClave(String palabraNoClave){
-        this.palabrasNoClave.add(palabraNoClave);
+    public void agregarPalabraNoClave(String nonValueWord){
+        this.nonValueWords.add(nonValueWord);
     }
 }
