@@ -3,22 +3,22 @@ package filters;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
+import models.Title;
 
 public class Output {
 
-  TreeSet<String> sortedList;
+    Title[] sortedList;
     public Output() {
 
     }
-    public Output(TreeSet<String> sortedList) {
+    public Output(Title[] sortedList) {
 this.sortedList = sortedList;
     }
     
     public String getOutput(){
-        Iterator<String> itr = this.sortedList.iterator(); 
         String aux="";
-        while (itr.hasNext()) { 
-            aux+=itr.next()+"\n";
+        for (int i=0;i<this.sortedList.length;i++) { 
+            aux+=this.sortedList[i].getTitle()+"\n";
         }
         return aux;
     }
