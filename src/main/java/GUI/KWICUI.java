@@ -198,7 +198,7 @@ public class KWICUI extends javax.swing.JFrame {
 
         } else {
             CircularShifting cS = new CircularShifting(vectorizedList(jTextArea1.getText()));
-            Alphabetizer alphabetizer = new Alphabetizer(cS.indexList(vectorizedList(jTextArea1.getText())));
+            Alphabetizer alphabetizer = new Alphabetizer(cS.circularShiftsProcess());
             Output output = new Output(alphabetizer.alfabetizar());
             this.titlesIndex = vectorizedList(jTextArea1.getText());
             jTextArea3.setText(output.getOutput());
@@ -216,7 +216,7 @@ public class KWICUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "¡No hay títulos para buscar!");
         } else {
             CircularShifting cS = new CircularShifting(vectorizedList(jTextArea1.getText()));
-            Alphabetizer alphabetizer = new Alphabetizer(cS.indexList(vectorizedList(jTextArea1.getText())));
+            Alphabetizer alphabetizer = new Alphabetizer(cS.circularShiftsProcess());
             SearchTitle searchTitle = new SearchTitle(alphabetizer.alfabetizar());
             Output output = new Output(searchTitle.searchTitleMethod(vectorize(jTextPane1.getText())));
             jTextArea3.setText(output.getOutput());
@@ -308,8 +308,16 @@ public class KWICUI extends javax.swing.JFrame {
     
      private String[] vectorize(String textArea){
         String[] titArray=textArea.toLowerCase().split(" ");
+        String keywords = "the of to a";
+        String s="";
+        for(int i =0;i<titArray.length;i++){
+            if(!keywords.contains(titArray[i])){
+                s+=titArray[i]+" ";
+            }
+        }
+        String[] res=s.split(" ");
         
-        return titArray;
+        return res;
         
         
         

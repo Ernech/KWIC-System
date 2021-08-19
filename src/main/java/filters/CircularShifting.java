@@ -10,7 +10,6 @@ public class CircularShifting {
     private Title[] titulo;
 //    private List<String> palabrasNoClave;
 
-
     public CircularShifting() {
 
     }
@@ -43,61 +42,86 @@ public class CircularShifting {
 //       System.out.println(palabras);
 //        return palabras;
 //    }
-    public   Title[] indexList(Title[] titulo){
-        Title[] indList= new Title[nIndex(titulo)];
-        int cont=0;
+    public Title[] indexList(Title[] titulo) {
+        Title[] indList = new Title[nIndex(titulo)];
+        int cont = 0;
 //        List<String> indList=new  ArrayList<>();
-        
-        for(int k=0;k<titulo.length;k++){
-        String tituloRorate = titulo[k].getTitle();
-        int id=titulo[k].getId();
-        String [] line = tituloRorate.split(" ");
-        String [][] output = new String[line.length][line.length];
-        //System.out.println("\nThe circular shifted lines are :");
-        for (int i = 0; i < line.length; i++){
-            String aux="";
-            
-            for (int j = 0; j < line.length; j++) {
-                output[i][j] = line[(i + j) % line.length];
-                aux+=output[i][j]+" ";
-                
-              //  System.out.print(output[i][j] + " ");
+
+        for (int k = 0; k < titulo.length; k++) {
+            String tituloRorate = titulo[k].getTitle();
+            int id = titulo[k].getId();
+            String[] line = tituloRorate.split(" ");
+            String[][] output = new String[line.length][line.length];
+            //System.out.println("\nThe circular shifted lines are :");
+            for (int i = 0; i < line.length; i++) {
+                String aux = "";
+
+                for (int j = 0; j < line.length; j++) {
+                    output[i][j] = line[(i + j) % line.length];
+                    aux += output[i][j] + " ";
+
+                    //  System.out.print(output[i][j] + " ");
+                }
+                Title t = new Title(aux, id);
+                indList[cont] = t;
+                cont++;
+                // System.out.println("\n");
             }
-            Title t=new Title(aux,id);
-            indList[cont]=t;
-            cont++;
-           // System.out.println("\n");
-        }  
         }
-        
-        return  indList;
+
+        return indList;
     }
-    
-    private int nIndex(Title[] titulo){
-        int numero=0;
-        for(int i=0; i<titulo.length;i++){
-            String[] tituloVector= titulo[i].getTitle().split(" ");
-            numero+=tituloVector.length;
+
+    private int nIndex(Title[] titulo) {
+        int numero = 0;
+        for (int i = 0; i < titulo.length; i++) {
+            String[] tituloVector = titulo[i].getTitle().split(" ");
+            numero += tituloVector.length;
         }
         return numero;
     }
 
-//    public  List<String> circularShiftsProcess(){
-//        List<String> keywords = this.keywords(this.titulo,this.palabrasNoClave);
-//        List<String> output= this.indexList(this.titulo);
-//        List<String> circularList = new ArrayList<>();
-//        for (int i = 0; i < output.size(); i++){
-//            String fila ="";
-//            String[] primeraPalabra=output.get(i).split(" ");
-//            if(keywords.contains(primeraPalabra[0])){
-//                
-//                for(int j=0; j< primeraPalabra.length; j++){
-//                    fila += primeraPalabra[j]+" ";
-//                }
+    public Title[] circularShiftsProcess() {
+
+        String keywords = "the of to a";
+        Title[] output = this.indexList(this.titulo);
+        int cantidad = 0;
+//        Title[] circularList = new Title[];
+        for (int i = 0; i < output.length; i++) {
+            String fila = "";
+            String[] primeraPalabra = output[i].getTitle().split(" ");
+
+            if (!keywords.contains(primeraPalabra[0].toLowerCase())) {
+
 //                circularList.add(fila);
-//            }
-//        }
-//        return circularList;
-//    }
+                cantidad++;
+            }
+        }
+
+        String[] title = new String[cantidad];
+        int[] ids = new int[cantidad];
+        int c = 0;
+
+        for (int i = 0; i < output.length; i++) {
+            String fila = "";
+            String[] primeraPalabra = output[i].getTitle().split(" ");
+
+            if (!keywords.contains(primeraPalabra[0].toLowerCase())) {
+
+                title[c] = output[i].getTitle();
+                ids[c] = output[i].getId();
+                c++;
+            }
+        }
+
+        Title[] circularList = new Title[cantidad];
+
+        for (int i = 0; i < title.length; i++) {
+            Title aux = new Title(title[i], ids[i]);
+            circularList[i] = aux;
+        }
+
+        return circularList;
+    }
 
 }

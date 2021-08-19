@@ -33,36 +33,40 @@ public class SearchTitle {
 
     public Title[] searchTitleMethod(String[] searchWords) {
         int results = 0;
-        int sbi;
+//        int sbi;
         for (int i = 0; i < this.sortedList.length; i++) {
-            sbi = 0;
+//            sbi = 0;
+            String[] ppalabra = this.sortedList[i].getTitle().toLowerCase().split(" ");
             for (int j = 0; j < searchWords.length; j++) {
 
-                if (this.sortedList[i].getTitle().toLowerCase().contains(searchWords[j])) {
-                    sbi++;
+                if (ppalabra[0].equals(searchWords[j])) {
+                    results++;
                 }
             }
-            if (sbi == searchWords.length) {
-                results++;
-            }
+//            if (sbi == searchWords.length) {
+//                results++;
+//            }
         }
         Title[] searchResult = new Title[results];
         String[] res = new String[results];
         int[] ids = new int[results];
         int cc = 0;
         for (int i = 0; i < this.sortedList.length; i++) {
-            sbi = 0;
+//            sbi = 0;
+            String[] ppalabra = this.sortedList[i].getTitle().toLowerCase().split(" ");
             for (int j = 0; j < searchWords.length; j++) {
 
-                if (this.sortedList[i].getTitle().toLowerCase().contains(searchWords[j])) {
-                    sbi++;
+                if (ppalabra[0].equals(searchWords[j])) {
+                    res[cc] = this.sortedList[i].getTitle();
+                    ids[cc] = this.sortedList[i].getId();
+                    cc++;
                 }
             }
-            if (sbi == searchWords.length) {
-                res[cc] = this.sortedList[i].getTitle();
-                ids[cc] = this.sortedList[i].getId();
-                cc++;
-            }
+//            if (sbi == searchWords.length) {
+//                res[cc] = this.sortedList[i].getTitle();
+//                ids[cc] = this.sortedList[i].getId();
+//                cc++;
+//            }
 
         }
 
@@ -98,33 +102,80 @@ public class SearchTitle {
 
     public String[] findTitles(Title[] res, String[] searchwords) {
         int results = 0;
-
-        for (int i = 0; i < res.length; i++) {
-            for (int j = 0; j < searchTitleMethod(searchwords).length; j++) {
-
-                if (searchTitleMethod(searchwords)[j].getId() == res[i].getId()) {
-                    results++;
-                    System.out.println(results + " R " + res[i].getId() + "|" + searchTitleMethod(searchwords)[j].getId());
-                }
-            }
-        }
-
-        String[] result = new String[results];
-        String tr = "";
         int cc = 0;
+        String ids = "";
+        String aux = "";
         for (int i = 0; i < res.length; i++) {
             for (int j = 0; j < searchTitleMethod(searchwords).length; j++) {
+                String ayuda = "" + searchTitleMethod(searchwords)[j].getId();
                 if (searchTitleMethod(searchwords)[j].getId() == res[i].getId()) {
-                    if (!tr.contains(res[i].getTitle())) {
-                        result[cc] = res[i].getTitle();
-                        tr += result[cc] + " ";
-                    } else {
-                        result[cc] = "";
-                    }
-                    cc++;
+
+                    ids += searchTitleMethod(searchwords)[j].getId() + " ";
+
                 }
             }
         }
+        System.out.println(ids);
+        String[] comprobarIds = ids.split(" ");
+        for (int i = 0; i < res.length; i++) {
+            for (int j = 0; j < searchTitleMethod(searchwords).length; j++) {
+
+                if (searchTitleMethod(searchwords)[j].getId() == res[i].getId()) {
+                    cc = 0;
+                    String ayuda = "" + searchTitleMethod(searchwords)[j].getId();
+                    for (int k = 0; k < comprobarIds.length; k++) {
+                        if (!aux.contains(ayuda)) {
+                            if (comprobarIds[k].equals(ayuda)) {
+                                System.out.println(ayuda);
+                                cc++;
+                            }
+                        }
+                    }
+                    if (cc > searchwords.length) {
+                        cc--;
+                    }
+                    aux += ayuda + " ";
+                    if (cc == searchwords.length) {
+                        results++;
+                    }
+                }
+            }
+        }
+        System.out.println("Results =" + results);
+        String[] result = new String[results];
+//        String tr = "";
+        int cresult = 0;
+        cc = 0;
+        aux = "";
+
+        for (int i = 0; i < res.length; i++) {
+
+            for (int j = 0; j < searchTitleMethod(searchwords).length; j++) {
+
+                if (searchTitleMethod(searchwords)[j].getId() == res[i].getId()) {
+                    cc = 0;
+                    String ayuda = "" + searchTitleMethod(searchwords)[j].getId();
+                    for (int k = 0; k < comprobarIds.length; k++) {
+
+                        if (!aux.contains(ayuda)) {
+                            if (comprobarIds[k].equals(ayuda)) {
+                                cc++;
+                            }
+                        }
+                    }
+                    if (cc > searchwords.length) {
+                        cc--;
+                    }
+                    aux += ayuda + " ";
+                    if (cc == searchwords.length) {
+                        result[cresult] = res[i].getTitle();
+                        cresult++;
+                    }
+                }
+
+            }
+        }
+
         return result;
     }
 
