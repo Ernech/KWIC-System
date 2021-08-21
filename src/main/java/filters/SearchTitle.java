@@ -30,7 +30,8 @@ public class SearchTitle {
     public void setSortedList(Title[] sortedList) {
         this.sortedList = sortedList;
     }
-/*
+
+    /*
     public Title[] searchTitleMethod(String[] searchWords) {
         int results = 0;
 //        int sbi;
@@ -99,123 +100,143 @@ public class SearchTitle {
 //            return result;
 //        }
     }*/
+    public Title[] searchTitleMethod2(String[] searchWords) {
+        if (searchWords.length > 0) {
+            int results = 0;
+            for (int i = 0; i < sortedList.length; i++) {
+                String[] titleSplitted = vectorize(this.sortedList[i].getTitle());
 
-    public Title[] searchTitleMethod2(String[] searchWords){
-        int results = 0;
-        for (int i =0;i<sortedList.length;i++){
-            String [] titleSplitted = vectorize(this.sortedList[i].getTitle());
-
-            if(searchWords.length<=titleSplitted.length){
-                if(match(titleSplitted,searchWords)){
-                    results++;
+                if (searchWords.length <= titleSplitted.length) {
+                    if (match(titleSplitted, searchWords)) {
+                        results++;
+                    }
                 }
             }
-        }
-        System.out.println("RESULTS!!!!!! "+results);
-        Title[] searchResult = new Title[results];
-        String[] res = new String[results];
-        int[] ids = new int[results];
-        int cc = 0;
-        for (int i =0;i<sortedList.length;i++){
-            String [] titleSplitted = vectorize(this.sortedList[i].getTitle());
-            if(searchWords.length<=titleSplitted.length){
-                if(match(titleSplitted,searchWords)){
-                    res[cc] = this.sortedList[i].getTitle();
-                    ids[cc] = this.sortedList[i].getId();
-                    cc++;
+//        System.out.println("RESULTS!!!!!! "+results);
+            Title[] searchResult = new Title[results];
+            String[] res = new String[results];
+            int[] ids = new int[results];
+            int cc = 0;
+            for (int i = 0; i < sortedList.length; i++) {
+                String[] titleSplitted = vectorize(this.sortedList[i].getTitle());
+                if (searchWords.length <= titleSplitted.length) {
+                    if (match(titleSplitted, searchWords)) {
+                        res[cc] = this.sortedList[i].getTitle();
+                        ids[cc] = this.sortedList[i].getId();
+                        cc++;
+                    }
                 }
             }
-        }
 
-        for (int i = 0;
-             i < results;
-             i++) {
-            Title t = new Title(res[i], ids[i]);
-            searchResult[i] = t;
-        }
+            for (int i = 0;
+                    i < results;
+                    i++) {
+                Title t = new Title(res[i], ids[i]);
+                searchResult[i] = t;
+            }
 
-        return searchResult;
+            return searchResult;
+        }
+        return new Title[0];
     }
 
-    private boolean match(String[] title,String [] searchWords){
-        String titleString="";
-        String searchWordsString="";
-        for(int i = 0;i<title.length;i++){
-            titleString+=title[i].toLowerCase()+" ";
-        }
-        for(int i = 0;i<searchWords.length;i++){
-            searchWordsString+=searchWords[i].toLowerCase()+" ";
-        }
-        if(titleString.contains(searchWordsString)){
+    private boolean match(String[] title, String[] searchWords) {
+        int cWords = 0;
+//        for (int i = 0; i < title.length; i++) {
+//           System.out.print(title[i]+" ");
+//           
+//        }
+//        System.out.println("");
+        
+        
+            for (int j = 0; j < searchWords.length; j++) {
+                if (title[j].toLowerCase().equals(searchWords[j].toLowerCase())) {
+                    cWords++;
+//                    System.out.println("Word ="+title[j]+"Search= "+searchWords[j]);
+
+                }
+            }
+
+        if (cWords == searchWords.length) {
             return true;
         }
         return false;
+//        String titleString="";
+//        String searchWordsString="";
+//        for(int i = 0;i<title.length;i++){
+//            titleString+=title[i].toLowerCase()+" ";
+//        }
+//        for(int i = 0;i<searchWords.length;i++){
+//            searchWordsString+=searchWords[i].toLowerCase()+" ";
+//        }
+//        if(titleString.contains(searchWordsString)){
+//            return true;
+//        }
+//        return false;
 
     }
 
-
-    private String[] vectorize(String textArea){
-        String[] titArray=textArea.toLowerCase().split(" ");
+    private String[] vectorize(String textArea) {
+        String[] titArray = textArea.toLowerCase().split(" ");
         String keywords = "the of to a";
-        String s="";
-        for(int i =0;i<titArray.length;i++){
-            if(!keywords.contains(titArray[i])){
-                s+=titArray[i]+" ";
+        String s = "";
+        for (int i = 0; i < titArray.length; i++) {
+            if (!keywords.contains(titArray[i])) {
+                s += titArray[i] + " ";
             }
         }
-        String[] res=s.split(" ");
+        String[] res = s.split(" ");
 
         return res;
 
-
-
     }
+
     public String[] findTitles(Title[] res, String[] searchwords) {
         int results = 0;
-        int cc = 0;
+//        int cc = 0;
         String ids = "";
         String aux = "";
-        for (int i = 0; i < res.length; i++) {
-            for (int j = 0; j < searchTitleMethod2(searchwords).length; j++) {
-
-                if (searchTitleMethod2(searchwords)[j].getId() == res[i].getId()) {
-
-                    ids += searchTitleMethod2(searchwords)[j].getId() + " ";
-
-                }
-            }
-        }
+//        for (int i = 0; i < res.length; i++) {
+//            for (int j = 0; j < searchTitleMethod2(searchwords).length; j++) {
+//
+//                if (searchTitleMethod2(searchwords)[j].getId() == res[i].getId()) {
+//
+//                    ids += searchTitleMethod2(searchwords)[j].getId() + " ";
+//
+//                }
+//            }
+//        }
         System.out.println(ids);
-        String[] comprobarIds = ids.split(" ");
+//        String[] comprobarIds = ids.split(" ");
         for (int i = 0; i < res.length; i++) {
             for (int j = 0; j < searchTitleMethod2(searchwords).length; j++) {
 
                 if (searchTitleMethod2(searchwords)[j].getId() == res[i].getId()) {
-                    cc = 0;
+//                    cc = 0;
                     String ayuda = "" + searchTitleMethod2(searchwords)[j].getId();
-                    for (int k = 0; k < comprobarIds.length; k++) {
-                        if (!aux.contains(ayuda)) {
-                            if (comprobarIds[k].equals(ayuda)) {
-                                System.out.println(ayuda);
-                                cc++;
-                            }
-                        }
-                    }
-                    if (cc > searchwords.length) {
-                        cc--;
-                    }
-                    aux += ayuda + " ";
-                    if (cc == searchwords.length) {
+//                    for (int k = 0; k < comprobarIds.length; k++) {
+                    if (!aux.contains(ayuda)) {
+//                            if (comprobarIds[k].equals(ayuda)) {
+//                                System.out.println(ayuda);
+//                                cc++;
+//                            }
+//                        }
+//                    }
+//                    if (cc > searchwords.length) {
+//                        cc--;
+//                    }
+                        aux += ayuda + " ";
+//                    if (cc == searchwords.length) {
                         results++;
                     }
                 }
             }
         }
-        System.out.println("Results =" + results);
+//        System.out.println("Results =" + results);
         String[] result = new String[results];
 //        String tr = "";
         int cresult = 0;
-        cc = 0;
+//        cc = 0;
         aux = "";
 
         for (int i = 0; i < res.length; i++) {
@@ -223,21 +244,21 @@ public class SearchTitle {
             for (int j = 0; j < searchTitleMethod2(searchwords).length; j++) {
 
                 if (searchTitleMethod2(searchwords)[j].getId() == res[i].getId()) {
-                    cc = 0;
+//                    cc = 0;
                     String ayuda = "" + searchTitleMethod2(searchwords)[j].getId();
-                    for (int k = 0; k < comprobarIds.length; k++) {
-
-                        if (!aux.contains(ayuda)) {
-                            if (comprobarIds[k].equals(ayuda)) {
-                                cc++;
-                            }
-                        }
-                    }
-                    if (cc > searchwords.length) {
-                        cc--;
-                    }
-                    aux += ayuda + " ";
-                    if (cc == searchwords.length) {
+//                    for (int k = 0; k < comprobarIds.length; k++) {
+//
+                    if (!aux.contains(ayuda)) {
+//                            if (comprobarIds[k].equals(ayuda)) {
+//                                cc++;
+//                            }
+//                        }
+//                    }
+//                    if (cc > searchwords.length) {
+//                        cc--;
+//                    }
+                        aux += ayuda + " ";
+//                    if (cc == searchwords.length) {
                         result[cresult] = res[i].getTitle();
                         cresult++;
                     }

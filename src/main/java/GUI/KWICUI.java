@@ -25,6 +25,7 @@ import models.Title;
  * @author diego
  */
 public class KWICUI extends javax.swing.JFrame {
+
     private Title[] titlesIndex;
     private int nTitles;
 
@@ -257,7 +258,7 @@ public class KWICUI extends javax.swing.JFrame {
 
     private void abrirArchivo() {
         String fileList = "";
-        int nTitles=0;
+        int nTitles = 0;
         JFileChooser chooser = new JFileChooser();
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -278,56 +279,60 @@ public class KWICUI extends javax.swing.JFrame {
                 exception.printStackTrace();
             }
 
-
         }
         jTextArea1.setText(fileList);
-        this.nTitles=nTitles;
+        this.nTitles = nTitles;
     }
 
     private String getSearchOutput(List<String> titles) {
         String aux = "";
-        for (int i=0;i<titles.size();i++){
-            aux+=titles.get(i)+"\n";
+        for (int i = 0; i < titles.size(); i++) {
+            aux += titles.get(i) + "\n";
         }
         return aux;
     }
-    
-    private Title[] vectorizedList(String textArea){
-        Title[] vL=new Title[this.nTitles];
-        String[] titArray=textArea.split("\n");
-        for(int i=0;i<this.nTitles;i++){
-            Title t=new Title(titArray[i],i+1);
-            vL[i]=t;
+
+    private Title[] vectorizedList(String textArea) {
+        Title[] vL = new Title[this.nTitles];
+        String[] titArray = textArea.split("\n");
+        for (int i = 0; i < this.nTitles; i++) {
+            Title t = new Title(titArray[i], i + 1);
+            vL[i] = t;
         }
-        
+
         return vL;
-        
-        
-        
+
     }
-    
-     private String[] vectorize(String textArea){
-        String[] titArray=textArea.toLowerCase().split(" ");
+
+    private String[] vectorize(String textArea) {
         String keywords = "the of to a";
-        String s="";
-        for(int i =0;i<titArray.length;i++){
-            if(!keywords.contains(titArray[i])){
-                s+=titArray[i]+" ";
+        String[] titArray = textArea.toLowerCase().split(" ");
+        if (textArea.length() <= 3 && textArea.contains(keywords)) {
+            return new String[0];
+        } else {
+            String s = "";
+            for (int i = 0; i < titArray.length; i++) {
+                if (!keywords.contains(titArray[i])) {
+                    s += titArray[i] + " ";
+                }
+
+            }
+            if (s != "") {
+                String[] res = s.split(" ");
+                return res;
+            } else {
+                return new String[0];
             }
         }
-        String[] res=s.split(" ");
-        
-        return res;
-        
-        
-        
+
     }
-     
-     public String toText(String[] vct){
-        String aux="";
-        for (int i=0;i<vct.length;i++) { 
-            if(vct[i]!="")
-            aux+=vct[i]+"\n";
+
+    public String toText(String[] vct) {
+        String aux = "";
+        for (int i = 0; i < vct.length; i++) {
+            if (vct[i] != "") {
+                aux += vct[i] + "\n";
+            }
         }
         return aux;
     }
