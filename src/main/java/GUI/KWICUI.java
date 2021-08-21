@@ -218,7 +218,7 @@ public class KWICUI extends javax.swing.JFrame {
             CircularShifting cS = new CircularShifting(vectorizedList(jTextArea1.getText()));
             Alphabetizer alphabetizer = new Alphabetizer(cS.circularShiftsProcess());
             SearchTitle searchTitle = new SearchTitle(alphabetizer.alfabetizar());
-            Output output = new Output(searchTitle.searchTitleMethod(vectorize(jTextPane1.getText())));
+            Output output = new Output(searchTitle.searchTitleMethod2(vectorize(jTextPane1.getText())));
             jTextArea3.setText(output.getOutput());
             jTextArea2.setText(toText(searchTitle.findTitles(this.titlesIndex, vectorize(jTextPane1.getText()))));
         }
