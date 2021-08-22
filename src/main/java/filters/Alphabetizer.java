@@ -33,7 +33,7 @@ public class Alphabetizer {
         }
         
         for (int i = 0; i < this.circularTitles.length; i++) {
-            System.out.println("T ="+this.circularTitles[i].getTitle());
+
             for (int j = i + 1; j < this.circularTitles.length; j++) {
                 
                 // to compare one string with other strings

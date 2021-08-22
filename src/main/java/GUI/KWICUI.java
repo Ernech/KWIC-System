@@ -19,6 +19,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import models.Title;
+import utils.Utils;
 
 /**
  *
@@ -128,7 +129,7 @@ public class KWICUI extends javax.swing.JFrame {
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
 
-        jLabel3.setText("OUTPUT");
+        jLabel3.setText("ÍNDICE");
 
         jScrollPane4.setViewportView(jTextPane1);
 
@@ -219,9 +220,7 @@ public class KWICUI extends javax.swing.JFrame {
             CircularShifting cS = new CircularShifting(vectorizedList(jTextArea1.getText()));
             Alphabetizer alphabetizer = new Alphabetizer(cS.circularShiftsProcess());
             SearchTitle searchTitle = new SearchTitle(alphabetizer.alfabetizar());
-            Output output = new Output(searchTitle.searchTitleMethod2(vectorize(jTextPane1.getText())));
-            jTextArea3.setText(output.getOutput());
-            jTextArea2.setText(toText(searchTitle.findTitles(this.titlesIndex, vectorize(jTextPane1.getText()))));
+            jTextArea2.setText(toText(searchTitle.findTitles(this.titlesIndex, Utils.vectorize(jTextPane1.getText()))));
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -245,16 +244,6 @@ public class KWICUI extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
-//    public List<String> lista(String palabras) {
-//        List<String> lista = new ArrayList<>();
-//        String[] div = palabras.split("\n");
-//
-//        for (int i = 0; i < div.length; i++) {
-//            lista.add(div[i].toLowerCase());
-//        }
-//
-//        return lista;
-//    }
 
     private void abrirArchivo() {
         String fileList = "";
@@ -284,13 +273,6 @@ public class KWICUI extends javax.swing.JFrame {
         this.nTitles = nTitles;
     }
 
-    private String getSearchOutput(List<String> titles) {
-        String aux = "";
-        for (int i = 0; i < titles.size(); i++) {
-            aux += titles.get(i) + "\n";
-        }
-        return aux;
-    }
 
     private Title[] vectorizedList(String textArea) {
         Title[] vL = new Title[this.nTitles];
@@ -304,28 +286,6 @@ public class KWICUI extends javax.swing.JFrame {
 
     }
 
-    private String[] vectorize(String textArea) {
-        String keywords = "the of to a";
-        String[] titArray = textArea.toLowerCase().split(" ");
-        if (textArea.length() <= 3 && textArea.contains(keywords)) {
-            return new String[0];
-        } else {
-            String s = "";
-            for (int i = 0; i < titArray.length; i++) {
-                if (!keywords.contains(titArray[i])) {
-                    s += titArray[i] + " ";
-                }
-
-            }
-            if (s != "") {
-                String[] res = s.split(" ");
-                return res;
-            } else {
-                return new String[0];
-            }
-        }
-
-    }
 
     public String toText(String[] vct) {
         String aux = "";

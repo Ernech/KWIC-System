@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import models.Title;
+import utils.Utils;
 
 public class CircularShifting {
 
     private Title[] titulo;
-//    private List<String> palabrasNoClave;
+
 
     public CircularShifting() {
 
@@ -18,34 +19,11 @@ public class CircularShifting {
         this.titulo = titulo;
     }
 
-//    private  List<String> keywords(Title[] titulo){
-//        String[] palabras=new String[titulo.length];
-//        
-//        for(int i=0;i<titulo.length;i++){
-//            String [] tituloArray = titulo[i].getTitle().split(" ");
-//            
-//            for(int j =0;j<tituloArray.length;j++){
-////            if(!palabrasNoClave.contains(tituloArray[j])){
-////
-////                  if(!palabras.contains(tituloArray[j])){
-//                    palabras[i]=tituloArray[j];
-//                      System.out.println(tituloArray[j]);
-////                }
-////                }
-//                
-//                
-//            }
-//        }
-//        
-//        
-//        
-//       System.out.println(palabras);
-//        return palabras;
-//    }
+
     public Title[] indexList(Title[] titulo) {
         Title[] indList = new Title[nIndex(titulo)];
         int cont = 0;
-//        List<String> indList=new  ArrayList<>();
+
 
         for (int k = 0; k < titulo.length; k++) {
             String tituloRorate = titulo[k].getTitle();
@@ -83,7 +61,7 @@ public class CircularShifting {
 
     public Title[] circularShiftsProcess() {
 
-        String keywords = "the of to a";
+        String keywords = Utils.NON_KEYWWORDS;
         Title[] output = this.indexList(this.titulo);
         int cantidad = 0;
 //        Title[] circularList = new Title[];
